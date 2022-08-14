@@ -219,19 +219,24 @@ const states = [
   },
 ];
 
+
+
+
 function App() {
-  console.log(states);
- for(let i in states) {
-	for(let j in states[i].city) {
-		console.log(states[i].city[j].name);
-	}
- }
+  const [cityClick,setCity] = useState();
+  const [town,setTown] = useState();
+  console.log("main data ",states);
+
+
+
   return (
     <div id="main">
       <span>
         States:
         {
-          <select>
+          <select onChange={(e)=>{
+            setCity(e.target.value);
+          }}>
             {states.map((item) => {
               return <option>{item.name}</option>;
             })}
@@ -242,8 +247,40 @@ function App() {
 	  <span>
         Cities:
         {
-          <select>
-           
+          <select onChange={(e)=>setTown(e.target.value)}>
+            {
+              states.map((item)=>{
+                if(cityClick==item.name){
+                  return (
+                    item.city.map((item2)=><option>{item2.name}</option>)
+                  )
+                }
+              })
+            }
+          </select>
+        }
+      </span>
+
+      <span>
+        Town:
+        {
+          <select >
+            {
+              states.map((item)=>{
+                  return (
+                    item.city.map((item2)=>{
+                      if(item2.name===town) {
+                        return (
+                          item2.landmarks.map((item3)=>{
+                            return <option>{item3.name}</option>
+                          })
+                        )
+                      }
+                    })
+                  )
+                
+              })
+            }
           </select>
         }
       </span>
