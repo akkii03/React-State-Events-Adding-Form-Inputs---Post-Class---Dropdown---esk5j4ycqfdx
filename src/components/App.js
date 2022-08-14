@@ -238,9 +238,17 @@ function App() {
             setCity(e.target.value);
           }}>
             {states.map((item) => {
+             
               return <option>{item.name}</option>;
             })}
           </select>
+        }
+        {
+          states.map((item)=>{
+            if(cityClick===item.name) {
+              return <p>{item.description}</p>
+            }
+          })
         }
       </span>
 
@@ -259,6 +267,22 @@ function App() {
             }
           </select>
         }
+
+        {
+          states.map((item)=>{
+            if(cityClick===item.name) {
+             item.city.map((item2)=>{
+              if(item2.name===town) {
+                console.log("item2 ka description is ",item2.description)
+                return (
+                  <p>{item2.description}</p>
+                )
+              }
+             })
+            }
+          })
+        }
+        
       </span>
 
       <span>
