@@ -14,3 +14,7 @@ button{
 .bg-pink{
 	background-color:pink;
 }
+.landmarkDiv{
+    display: flex;
+    flex-direction: column;
+}

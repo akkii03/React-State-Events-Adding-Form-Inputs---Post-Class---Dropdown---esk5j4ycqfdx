@@ -225,7 +225,8 @@ const states = [
 function App() {
   const [cityClick,setCity] = useState();
   const [town,setTown] = useState();
-  console.log("main data ",states);
+  const [landmark,setLandmark] = useState();
+
 
 
 
@@ -234,19 +235,24 @@ function App() {
       <span>
         States:
         {
-          <select onChange={(e)=>{
+          <select id="state" onChange={(e)=>{
             setCity(e.target.value);
           }}>
             {states.map((item) => {
              
-              return <option>{item.name}</option>;
+              return <option value={item.name}>{item.name}</option>;
             })}
           </select>
         }
         {
           states.map((item)=>{
             if(cityClick===item.name) {
-              return <p>{item.description}</p>
+              return (
+                <div style={{border:"2px solid black"}}>
+                  <div id="state-name" style={{fontWeight:"bolder"}}>{item.name}</div>
+                  <div id="state-description">{item.description}</div>
+                </div>
+              )
             }
           })
         }
@@ -255,12 +261,12 @@ function App() {
 	  <span>
         Cities:
         {
-          <select onChange={(e)=>setTown(e.target.value)}>
+          <select id="city" onChange={(e)=>setTown(e.target.value)}>
             {
               states.map((item)=>{
                 if(cityClick==item.name){
                   return (
-                    item.city.map((item2)=><option>{item2.name}</option>)
+                    item.city.map((item2)=><option value={item2.name}>{item2.name}</option>)
                   )
                 }
               })
@@ -268,27 +274,32 @@ function App() {
           </select>
         }
 
+
         {
           states.map((item)=>{
-            if(cityClick===item.name) {
-             item.city.map((item2)=>{
-              if(item2.name===town) {
-                console.log("item2 ka description is ",item2.description)
-                return (
-                  <p>{item2.description}</p>
-                )
-              }
-             })
-            }
+           return (
+            item.city.map((item2)=>{
+             if(item2.name==town) {
+              return (
+                <div style={{border:"2px solid black"}}>
+                  <div id="city-name" style={{fontWeight:"bolder"}}>{item2.name}</div>
+                  <div id="city-description">{item2.description}</div>
+                </div>
+              )
+             }
+            })
+           )
           })
         }
         
       </span>
 
-      <span>
-        Town:
+
+
+       <span>
+       Town:
         {
-          <select >
+          <select id="landmark" onChange={(e)=>setLandmark(e.target.value)} >
             {
               states.map((item)=>{
                   return (
@@ -296,7 +307,12 @@ function App() {
                       if(item2.name===town) {
                         return (
                           item2.landmarks.map((item3)=>{
-                            return <option>{item3.name}</option>
+                           
+                            return(
+                               <>
+                               <option value={item3.name} >{item3.name}</option>
+                            </>
+                            )
                           })
                         )
                       }
@@ -307,7 +323,35 @@ function App() {
             }
           </select>
         }
-      </span>
+       </span>
+
+       <span>
+       {
+          states.map((item)=>{
+            return (
+              item.city.map((item2)=>{
+                return (
+                  item2.landmarks.map((item3)=>{
+                   
+                     if(item3.name==landmark) {
+                      return (
+                        <div style={{border:"2px solid black"}}>
+                          <div id="landmark-name" style={{fontWeight:"bolder"}}>{item3.name}</div>
+                          <div id="landmark-description">{item3.description}</div>
+                        </div>
+                      )
+                     }
+                    
+                  })
+                )
+              })
+            )
+          })
+        }
+       </span>
+
+ 
+
     </div>
   );
 }
