@@ -14,7 +14,15 @@ button{
 .bg-pink{
 	background-color:pink;
 }
-.landmarkDiv{
-    display: flex;
-    flex-direction: column;
+.landmark{
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+}
+
+.state{
+    margin-top: 12px;
+    padding-top: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
 }

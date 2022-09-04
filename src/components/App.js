@@ -223,9 +223,9 @@ const states = [
 
 
 function App() {
-  const [cityClick,setCity] = useState();
-  const [town,setTown] = useState();
-  const [landmark,setLandmark] = useState();
+  const [cityClick,setCity] = useState(states[0]);
+  const [town,setTown] = useState(states[0].city[0].name);
+  const [landmark,setLandmark] = useState(states[0].city[0].landmarks[0].name);
 
 
 
@@ -334,8 +334,10 @@ function App() {
                   item2.landmarks.map((item3)=>{
                    
                      if(item3.name==landmark) {
+                      console.log("town des is ",item3.description);
                       return (
                         <div style={{border:"2px solid black"}}>
+                          
                           <div id="landmark-name" style={{fontWeight:"bolder"}}>{item3.name}</div>
                           <div id="landmark-description">{item3.description}</div>
                         </div>
